@@ -1,7 +1,6 @@
 {
   "name": "pk-collab",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "mocha --exit",
@@ -24,5 +23,9 @@
   },
   "dependencies": {
     "express": "^4.16.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": ""
 }

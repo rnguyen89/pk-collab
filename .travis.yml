@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: BBw72PXXUoBO6KfGURzYD8gbCEprEnHNyTHeMlhl+Li+Ifgvsx+J/igPD1hKPC9V/jCtZhx/4n1h32okhd6doH5k12s6ZUWR81s8sqirQSKNd2oOni00wQvgHa53WqvQyxwsPUusEfvRCVVQD9J7xPSKM/lml5aavWvIFX63wGvRvp+XudbQETOlaAd0mkVsAjQZgoTvXqX70iS88hMyJthKO+ev34uMkIqMuY1OWY1GJ3w0Ni0knRI03Fh0dR3w+0+47zHUPmu87xjkAC//10N480S87DIgwVsG1heB0N+y/RIsYVhtdP1MCE0Sqd398nWFErgS+Qe25krdS9En+Zr8W9j5mqlkLUw09WwxTl/Q0B/SUcbSmwpTj0gqD7bhAF51d8bB5dolpeTBVxMsxI7ozpnKj3rr1CFHMCUUP9mLdmW6I6RbOhI+7qkAgiviWCNw8Q0c6+JLDjv9x6BttkmLB+nswVY4Wkfk3mdMrPMJ5NUwOWOzQmnRfB76xGOYI2ieBb5iqWxhpZ3Fz4IDgF60D5UM67puN5cJYAgIQNU7vCje7/ANoUoy/S0ZE4T1UdfX8ZdCPkjlkSzNeco9Xw7rmXur3fVZwe9L8m617FFOARsGn1dy5rIKQKLmxG8qJO4/xWhS55nWWSC+RG3NAJVnRgHR6vtdktQBKcJF6T0=
+  app: cryptic-river-66724
+  on:
+    repo: rnguyen89/pk-collab

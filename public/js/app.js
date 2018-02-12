@@ -47,9 +47,9 @@ function showLogin() {
     <form action="" class="login">
       <h1>Login</h1>
       <label for="email">Email</label><br>
-      <input type="text" name="email" required><br>
+      <input type="email" name="email" required><br>
       <label for="password">Password</label><br>
-      <input type="text" name="password" required><br>
+      <input type="password" name="password" required><br>
       <button class="login btn">login</button>
       <p>demo user: ness</p>
       <p>demo password: earthbound</p>      
@@ -86,11 +86,11 @@ function showSignup() {
         <label for="name">Last Name</label><br>
         <input type="text" placeholder="Enter last name" name="last-name" required><br>
         <label for="email">Email</label><br>
-        <input type="text" placeholder="Enter email" name="email" required><br>
+        <input type="email" placeholder="Enter email" name="email" required><br>
         <label for="password">Password</label><br>
-        <input type="text" placeholder="Enter password" name="password" required><br>
+        <input type="password" placeholder="Enter password" name="password" required><br>
         <label for="password-repeat">Repeat Password</label><br>
-        <input type="text" placeholder="Repeat password" name="password-repeat" required><br>
+        <input type="password" placeholder="Repeat password" name="password-repeat" required><br>
 
         <button type="button" class="cancel-btn btn">Cancel</button>
         <button type="submit" class="singup-btn btn">Sign Up</button>

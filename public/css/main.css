@@ -2,10 +2,10 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-form {
-  display: block;
-}
-
 body {
   background-color: blanchedalmond;
+}
+
+form {
+  margin: 20px 20px;
 }

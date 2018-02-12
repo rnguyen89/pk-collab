@@ -92,8 +92,8 @@ function showSignup() {
         <label for="password-repeat">Repeat Password</label><br>
         <input type="text" placeholder="Repeat password" name="password-repeat" required><br>
 
-        <button type="button" class="cancel-btn">Cancel</button>
-        <button type="submit" class="singup-btn">Sign Up</button>
+        <button type="button" class="cancel-btn btn">Cancel</button>
+        <button type="submit" class="singup-btn btn">Sign Up</button>
         <p class="has-accnt">Already have an account? <a href="#" class="login-accnt">Log in</a></p>
   
     </form>

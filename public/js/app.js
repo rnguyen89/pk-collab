@@ -1,16 +1,14 @@
 'use strict';  
 
-
-
 // login
 
 function showLogin() {
   const content = `
   <section>
-    <form action="" class="login">
+    <form action="dashboard.html" class="login">
       <h1>Login</h1>
-      <label for="email">Email</label><br>
-      <input type="email" name="email" required><br>
+      <label for="username">Username</label><br>
+      <input type="text" name="username" required><br>
       <label for="password">Password</label><br>
       <input type="password" name="password" required><br>
       <button class="login btn">login</button>
@@ -41,15 +39,15 @@ function loginLink() {
 function showSignup() {
   const content = `
   <section>
-    <form action="" class="sign-up">
+    <form action="dashboard.html" class="sign-up">
       <h1>Sign Up</h1>
         <p>Please fill in this form to create an account</p>
         <label for="name">First Name</label><br>
         <input type="text" placeholder="Enter first name" name="first-name" required><br>
         <label for="name">Last Name</label><br>
         <input type="text" placeholder="Enter last name" name="last-name" required><br>
-        <label for="email">Email</label><br>
-        <input type="email" placeholder="Enter email" name="email" required><br>
+        <label for="username">username</label><br>
+        <input type="text" placeholder="Enter username" name="username" required><br>
         <label for="password">Password</label><br>
         <input type="password" placeholder="Enter password" name="password" required><br>
         <label for="password-repeat">Repeat Password</label><br>

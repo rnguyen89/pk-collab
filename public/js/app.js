@@ -1,4 +1,4 @@
-'use strict';  
+'use strict';
 
 // login
 
@@ -22,14 +22,14 @@ function showLogin() {
 };
 
 function login() {
-  $('.start-button').on('click', function(e) {
+  $('.start-button').on('click', function (e) {
     e.preventDefault();
     showLogin();
   });
 };
 
 function loginLink() {
-  $('main').on('click', ".login-accnt", function(e) {
+  $('main').on('click', ".login-accnt", function (e) {
     e.preventDefault();
     showLogin();
   });
@@ -64,16 +64,16 @@ function showSignup() {
 };
 
 function signupLink() {
-  $('main').on('click', ".create-accnt", function(e) {
+  $('main').on('click', ".create-accnt", function (e) {
     e.preventDefault();
     showSignup();
   });
 };
 
-  function ignition() {
-    login();
-    loginLink();
-    signupLink();
-  }
+function ignition() {
+  login();
+  loginLink();
+  signupLink();
+}
 
-  $(ignition);
+$(ignition);

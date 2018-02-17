@@ -24,66 +24,80 @@ event.preventDefault();
 });
 }
 
-function generateTodoItem() {
+function generateNewCard() {
   return `
-  <div class="task" draggable="true">
-  <div class="cardTitle">
-              new item
-          </div>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Textarea</label>
+        </div>
+      </div>
+    </form>
   </div>
-  `
-}
 
-function renderTodoItem() {
-  $('#todo').append(generateTodoItem);
+`;
 }
-
-function addTodoItem() {
-  $('.addItem').on('click', function(e) {
-    e.preventDefault();
-    renderTodoItem();
-  })
-}
+$('#textarea1').val('New Text');
+$('#textarea1').trigger('autoresize');
 
 function generateNewCard() {
     return `
-    
     <div class="col s12 task" id="item${state.taskId}" draggable="true">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <input class="card-title">
-          Card Title</input>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+    <div class="card blue-grey darken-1 myCard">
+      <div class="card-content white-text">
+        <input class="card-title" placeholder="Card Title" />
+      </div>
+
+      <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea${state.taskId}" class="materialize-textarea"></textarea>
+            <label for="textarea${state.taskId}">Tasks</label>
+          </div>
         </div>
-        <div class="card-action">
-          <a href="#">edit</a>
-          <a href="#">delete</a>
-        </div>
+      </form>
+    </div>
+
+      <div class="card-action">
+        <a href="#" class="editCard">edit</a>
+        <a href="#" class="deleteCard">delete</a>
       </div>
     </div>
+  </div>
+</div>
   `;
   }
+
+function removeCard() {
+    $('#board').on("click", ".deleteCard" , function() {
+      $(this).closest('.task').remove();
+    });  
+  }
+
 
   function renderNewCard() {
     state.taskId++
     $('#todo').append(generateNewCard);
-
+    
+    $('.materialize-textarea').trigger('autoresize');
+    
   }
 
   
-  function addCard() {
+  function handleNewCard() {
     $('.add-new').on('click', function(e) {
       e.preventDefault();
       renderNewCard();
-
     }) 
   }
 
   function init() {
-    addCard();
     initIt();
-    addTodoItem();
+    handleNewCard();
+    removeCard();
   }
 
   $(init);

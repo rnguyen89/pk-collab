@@ -1,7 +1,41 @@
 'use strict';
 const state = {
-  taskId: 0
+  taskId: 0,
+  tasks: []
 }
+
+function getTask() {
+  const url = 'http://localhost:8080/task'
+
+  const options = {
+    url: url,
+    dataType: 'json',
+    type: 'GET',
+    success: function(tasks) {
+      state.tasks = tasks
+      state.tasks.forEach(task => {
+      $('#todo').append(generateNewCard(task));
+      })
+    }
+  };
+
+  $.ajax(options);
+}
+
+// function getPost() {
+//   const url = 'http://localhost:8080/'
+
+//   const options = {
+//     url: url,
+//     dataType: 'json',
+//     type: 'POST',
+//     success: callbackTrailer
+//   };
+
+//   $.ajax(options);
+// }
+
+
 
 function initIt() {
 
@@ -21,7 +55,7 @@ function initIt() {
 }
 
 
-function generateNewCard() {
+function generateNewCard(task) {
   return `
     <div class="col s12 task" id="item${state.taskId}" draggable="true">
     <div class="card small blue-grey darken-1 myCard">
@@ -33,7 +67,8 @@ function generateNewCard() {
       <form class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="textarea${state.taskId}" class="materialize-textarea"></textarea>
+            <textarea id="textarea${state.taskId}" class="materialize-textarea">
+            ${task.description}</textarea>
             <label for="textarea${state.taskId}">Description</label>
           </div>
         </div>
@@ -59,9 +94,10 @@ function removeCard() {
 
 function renderNewCard() {
   state.taskId++
-  $('#todo').append(generateNewCard);
+  $('#todo').append(generateNewCard({
+    taskId: state.taskId
+  }));
   $('.materialize-textarea').trigger('autoresize');
-
 }
 
 
@@ -76,6 +112,7 @@ function init() {
   initIt();
   handleNewCard();
   removeCard();
+  getTask();
 }
 
 $(init);

@@ -11,6 +11,7 @@ const { Task } = require('./models');
 
 
 router.get('/', (req, res) => {
+  console.log('hello world');
     Task
       .find()
       .then(posts => {
@@ -34,7 +35,7 @@ router.get('/', (req, res) => {
   
   router.post('/', (req, res) => {
   
-    const requiredFields = ['title', 'content', 'author'];
+    const requiredFields = ['title', 'description', 'created'];
     for (let i = 0; i < requiredFields.length; i++) {
       const field = requiredFields[i];
       if (!(field in req.body)) {
@@ -47,8 +48,8 @@ router.get('/', (req, res) => {
     Task
       .create({
         title: req.body.title,
-        content: req.body.content,
-        author: req.body.author
+        description: req.body.description,
+        created: req.body.created
         // publishDate: req.body.publishDate
       })
       .then(task => res.status(201).json(task.serialize()))
@@ -80,7 +81,7 @@ router.get('/', (req, res) => {
     }
   
     const toUpdate = {};
-    const updateableFields = ['title', 'content', 'author'];
+    const updateableFields = ['title', 'description', 'created'];
     updateableFields.forEach(field => {
       if (field in req.body) {
         toUpdate[field] = req.body[field];
@@ -97,7 +98,7 @@ router.get('/', (req, res) => {
     Task
     .findByIdAndRemove(req.params.id)
     .then(() => {
-      console.log(`Deleted blog post with \`${req.params.id}\``);
+      console.log(`Deleted task with \`${req.params.id}\``);
     });
   });
   

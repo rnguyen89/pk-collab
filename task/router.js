@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
   console.log('hello world');
     Task
       .find()
-      .then(posts => {
-        res.json(posts.map(post => post.serialize()));
+      .then(tasks => {
+        res.json(tasks.map(task => task.serialize()));
       })
       .catch(err => {
         console.error(err);

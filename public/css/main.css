@@ -6,12 +6,26 @@ body {
   background-color: blanchedalmond;
 }
 
+.sign-up {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.login {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
 form {
-  margin: 20px 20px;
+  margin: 0;
+}
+
+myCard {
+  width: 250px;
 }
 
 .card.small {
-	min-height: 300px;
+	min-height: 10px;
 	height: auto;
 }
 
@@ -29,7 +43,7 @@ body
 		}
 		.title
 		{
-			background-color:#52460a;	
+			background-color:#a0ddc4;	
 			text-align:center;
 			color:white;
 			padding: 2px 0px;
@@ -47,7 +61,7 @@ body
 		
 		#todo, #inprogress, #done
 		{
-			background-color: tan;
+			background-color: rgb(255, 255, 255);
 			position:absolute;
 			width: 300px;
 			min-height:150px;

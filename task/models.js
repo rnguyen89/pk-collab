@@ -13,6 +13,18 @@ const TaskSchema = mongoose.Schema({
 });
 
 
+TaskSchema.methods.serialize = function() {
+
+    return {
+      id: this._id,
+      title: this.title,
+      description: this.description,
+      board: this.board,
+      created: this.created
+    };
+  }
+
+
 
 const Task = mongoose.model('Task', TaskSchema);
 

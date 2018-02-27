@@ -76,13 +76,27 @@ function generateNewCard(task) {
     </div>
 
       <div class="card-action">
-        <a href="#" class="editCard">edit</a>
+        <a href="#" onclick="editTask(${task.taskId})" class="editCard">edit</a>
         <a href="#" class="deleteCard">delete</a>
       </div>
     </div>
   </div>
 </div>
   `;
+}
+
+function editTask(taskId) {
+
+  const task = state.tasks.find(task => {
+   return task.id === taskId
+  })
+  $.ajax({
+    type: 'POST', 
+    dataType: 'json', 
+    url: "http://localhost:8080/task", 
+    headers: {"content-type": "application/json"}, 
+    data: JSON.stringify(task)
+});
 }
 
 function removeCard() {

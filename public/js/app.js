@@ -5,13 +5,15 @@
 function showLogin() {
   const content = `
   <section>
-    <form action="dashboard.html" class="login">
-      <h1>Login</h1>
+    <form action="/login" method="post" class="login">
+      <h1 class="center-align">Login</h1>
       <label for="username">Username</label><br>
       <input type="text" name="username" required><br>
       <label for="password">Password</label><br>
       <input type="password" name="password" required><br>
-      <button class="login btn">login</button>
+      <div class="center-align">
+      <button class="login btn center-align">login</button>
+      </div>
       <p>demo user: ness</p>
       <p>demo password: earthbound</p>      
       <p class="no-accnt">Click <a href="#" class="create-accnt">here</a> to create an account.</p>
@@ -39,9 +41,9 @@ function loginLink() {
 function showSignup() {
   const content = `
   <section>
-    <form action="dashboard.html" class="sign-up">
-      <h1>Sign Up</h1>
-        <p>Please fill in this form to create an account</p>
+    <form action="/signup" method="post" class="sign-up">
+      <h1 class="center-align">Sign Up</h1>
+        <p class="center-align">Please fill in this form to create an account</p>
         <label for="name">First Name</label><br>
         <input type="text" placeholder="Enter first name" name="first-name" required><br>
         <label for="name">Last Name</label><br>

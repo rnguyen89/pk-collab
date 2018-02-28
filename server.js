@@ -28,6 +28,7 @@ app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);
 app.use("/api/auth", authRouter);
 
+
 const jwtAuth = passport.authenticate("jwt", { session: false });
 
 // A protected endpoint which needs a valid JWT to access it

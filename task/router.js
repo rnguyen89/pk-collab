@@ -1,18 +1,15 @@
 'use strict';
 
-const express = require('express');
+const express = require("express");
+const bodyParser = require("body-parser");
+const { Task } = require("./models");
 const router = express.Router();
-
-const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const passport = require("passport");
 const jwtAuth = passport.authenticate("jwt", { session: false });
 
 
-const { Task } = require('./models');
-
-
-router.get('/', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
   console.log('hello world');
     Task
       .find()

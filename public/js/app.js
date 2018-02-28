@@ -1,12 +1,43 @@
 'use strict';
 
+function onLogin(event) {
+  event.preventDefault();
+  const existingUser = {
+    userName: $('#userName').val(),
+    password: $('#password').val()
+  }
+  console.log(existingUser);
+  $.ajax({
+    url: '/user/',
+    dataType: 'json',
+    method: 'POST',
+    data: JSON.stringify(newUser),
+    contentType: 'application/json',
+    success: function(data) {
+      console.log(data)
+      localStorage.setItem("token", data.authToken);
+      window.location = "/dashboard.html";
+    },
+   error: function(errMsg) {
+     console.log(errMsg);
+     userErr();
+   }
+  })
+}
+
+function userErr() {
+  $('.userWarn').html('Username does not exist');
+}
+
+
 // login
 
 function showLogin() {
   const content = `
   <section>
-    <form action="/login" method="post" class="login">
+    <form onsubmit="" method="post" class="login">
       <h1 class="center-align">Login</h1>
+      <div class="userWarn"></div>
       <label for="username">Username</label><br>
       <input type="text" name="username" required><br>
       <label for="password">Password</label><br>
@@ -37,21 +68,53 @@ function loginLink() {
   });
 };
 
+function onSignUp(event) {
+  event.preventDefault();
+  const newUser = {
+    firstName: $('#firstName').val(),
+    lastName: $('#lastName').val(),
+    userName: $('#userName').val(),
+    password: $('#password').val()
+  }
+  console.log(newUser);
+  $.ajax({
+    url: '/user/',
+    dataType: 'json',
+    method: 'POST',
+    data: JSON.stringify(newUser),
+    contentType: 'application/json',
+    success: function(data) {
+      console.log(data)
+      localStorage.setItem("token", data.authToken);
+      window.location = "/dashboard.html";
+    },
+   error: function(errMsg) {
+     console.log(errMsg);
+     duplicateUser();
+   }
+  })
+}
+
+function duplicateUser() {
+  $('.userWarn').html('Username is already taken');
+}
+
 //signup
 function showSignup() {
   const content = `
   <section>
-    <form action="/signup" method="post" class="sign-up">
+    <form onsubmit="onSignUp(event)" method="post" class="sign-up">
+    <div class="userWarn"><div>
       <h1 class="center-align">Sign Up</h1>
         <p class="center-align">Please fill in this form to create an account</p>
         <label for="name">First Name</label><br>
-        <input type="text" placeholder="Enter first name" name="first-name" required><br>
+        <input id="firstName" type="text" placeholder="Enter first name" name="first-name" required><br>
         <label for="name">Last Name</label><br>
-        <input type="text" placeholder="Enter last name" name="last-name" required><br>
+        <input id="lastName" type="text" placeholder="Enter last name" name="last-name" required><br>
         <label for="username">username</label><br>
-        <input type="text" placeholder="Enter username" name="username" required><br>
+        <input id="userName" type="text" placeholder="Enter username" name="username" required><br>
         <label for="password">Password</label><br>
-        <input type="password" placeholder="Enter password" name="password" required><br>
+        <input id="password" type="password" placeholder="Enter password" name="password" required><br>
         <label for="password-repeat">Repeat Password</label><br>
         <input type="password" placeholder="Repeat password" name="password-repeat" required><br>
 

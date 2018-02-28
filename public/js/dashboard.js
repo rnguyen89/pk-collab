@@ -22,6 +22,20 @@ function getTask() {
   $.ajax(options);
 }
 
+function editTask(taskId) {
+
+  const task = state.tasks.find(task => {
+   return task.id === taskId
+  })
+  $.ajax({
+    type: 'POST', 
+    dataType: 'json', 
+    url: "http://localhost:8080/task", 
+    headers: {"content-type": "application/json"}, 
+    data: JSON.stringify(task)
+});
+}
+
 // function getPost() {
 //   const url = 'http://localhost:8080/'
 
@@ -85,19 +99,6 @@ function generateNewCard(task) {
   `;
 }
 
-function editTask(taskId) {
-
-  const task = state.tasks.find(task => {
-   return task.id === taskId
-  })
-  $.ajax({
-    type: 'POST', 
-    dataType: 'json', 
-    url: "http://localhost:8080/task", 
-    headers: {"content-type": "application/json"}, 
-    data: JSON.stringify(task)
-});
-}
 
 function removeCard() {
   $('#board').on("click", ".deleteCard", function () {

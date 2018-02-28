@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const { User } = require("./models");
 const router = express.Router();
 const jsonParser = bodyParser.json();
-const passport = require("passport");
 
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password'];
@@ -124,4 +123,4 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
-module.exports = router;
+module.exports = {router};

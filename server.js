@@ -1,9 +1,14 @@
 'use strict';
-
-const bodyParser = require('body-parser');
+require('dotenv').config();
 const express = require('express');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const passport = require('passport');
+
+const port = process.env.PORT || 8080;
+
+const { router: userRouter } = require('./user');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -11,23 +16,48 @@ const app = express();
 
 const { DATABASE_URL, PORT } = require('./config');
 
-const taskRouter = require('./task/router');
-const usersRouter = require('./users/router');
 
 
 app.use(express.static('public'));
-app.use('/task', taskRouter);
-app.use('/users', usersRouter);
+app.use(cookieParser());
+app.use(morgan('common'));
 
 
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+    return res.send(204);
+  }
+  next();
+});
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
+
+app.get('/api/protected', jwtAuth, (req, res) => {
+  return res.json({
+    data: 'rosebud'
+  });
+});
+
+app.use('*', (req, res) => {
+  return res.status(404).json({ message: 'Not Found' });
+});
 
 if (require.main === module) {
-  runServer(DATABASE_URL, PORT);
+  runServer(DATABASE_URL, port);
 }
 
 let server;
 
-function runServer(databaseUrl, port=PORT) {
+function runServer(databaseUrl, port) {
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, {useMongoClient: true}, err => {
       if(err) {
@@ -61,4 +91,3 @@ function closeServer() {
 }
 
 module.exports = { app, runServer, closeServer };
-

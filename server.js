@@ -10,6 +10,8 @@ mongoose.Promise = global.Promise;
 const { DATABASE_URL, PORT } = require("./config");
 
 const { router: userRouter } = require("./user");
+const { router: taskRouter } = require("./task");
+
 const { router: authRouter, localStrategy, jwtStrategy } = require("./auth");
 
 const app = express();
@@ -23,6 +25,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 app.use("/api/user", userRouter);
+app.use("/api/task", taskRouter);
 app.use("/api/auth", authRouter);
 
 const jwtAuth = passport.authenticate("jwt", { session: false });

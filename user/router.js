@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const { User } = require("./models");
 const router = express.Router();
 const jsonParser = bodyParser.json();
+const passport = require("passport");
+const jwtAuth = passport.authenticate("jwt", { session: false });
 
 router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['username', 'password'];
@@ -117,7 +119,7 @@ router.post('/', jsonParser, (req, res) => {
     });
 });
 
-router.get('/', (req, res) => {
+router.get('/', jwtAuth, (req, res) => {
   return User.find()
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));

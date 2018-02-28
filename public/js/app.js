@@ -3,31 +3,30 @@
 function onLogin(event) {
   event.preventDefault();
   const existingUser = {
-    userName: $('#userName').val(),
-    password: $('#password').val()
+    username: $('#usernameLogin').val(),
+    password: $('#passwordLogin').val()
   }
   console.log(existingUser);
   $.ajax({
-    url: '/user/',
+    url: '/api/auth/login',
     dataType: 'json',
+    headers: {
+      Authorization: "basic " + btoa( `${existingUser.username}:${existingUser.password}`)
+    },
     method: 'POST',
-    data: JSON.stringify(newUser),
+    data: JSON.stringify(existingUser),
     contentType: 'application/json',
     success: function(data) {
       console.log(data)
       localStorage.setItem("token", data.authToken);
       window.location = "/dashboard.html";
-    },
-   error: function(errMsg) {
-     console.log(errMsg);
-     userErr();
-   }
+    }
   })
 }
 
-function userErr() {
-  $('.userWarn').html('Username does not exist');
-}
+// function userErr() {
+//   $('.userWarn').html('Username does not exist');
+// }
 
 
 // login
@@ -35,13 +34,13 @@ function userErr() {
 function showLogin() {
   const content = `
   <section>
-    <form onsubmit="" method="post" class="login">
+    <form onsubmit="onLogin(event)" method="post" class="login">
       <h1 class="center-align">Login</h1>
       <div class="userWarn"></div>
       <label for="username">Username</label><br>
-      <input type="text" name="username" required><br>
+      <input type="text" name="username" id="usernameLogin" required><br>
       <label for="password">Password</label><br>
-      <input type="password" name="password" required><br>
+      <input type="password" name="password" id="passwordLogin" required><br>
       <div class="center-align">
       <button class="login btn center-align">login</button>
       </div>
@@ -73,12 +72,12 @@ function onSignUp(event) {
   const newUser = {
     firstName: $('#firstName').val(),
     lastName: $('#lastName').val(),
-    userName: $('#userName').val(),
-    password: $('#password').val()
+    username: $('#username-su').val(),
+    password: $('#password-su').val()
   }
   console.log(newUser);
   $.ajax({
-    url: '/user/',
+    url: '/api/user/',
     dataType: 'json',
     method: 'POST',
     data: JSON.stringify(newUser),
@@ -87,17 +86,13 @@ function onSignUp(event) {
       console.log(data)
       localStorage.setItem("token", data.authToken);
       window.location = "/dashboard.html";
-    },
-   error: function(errMsg) {
-     console.log(errMsg);
-     duplicateUser();
-   }
+    }
   })
 }
 
-function duplicateUser() {
-  $('.userWarn').html('Username is already taken');
-}
+// function duplicateUser() {
+//   $('.userWarn').html('Username is already taken');
+// }
 
 //signup
 function showSignup() {
@@ -112,9 +107,9 @@ function showSignup() {
         <label for="name">Last Name</label><br>
         <input id="lastName" type="text" placeholder="Enter last name" name="last-name" required><br>
         <label for="username">username</label><br>
-        <input id="userName" type="text" placeholder="Enter username" name="username" required><br>
+        <input id="username-su" type="text" placeholder="Enter username" name="username" required><br>
         <label for="password">Password</label><br>
-        <input id="password" type="password" placeholder="Enter password" name="password" required><br>
+        <input id="password-su" type="password" placeholder="Enter password" name="password" required><br>
         <label for="password-repeat">Repeat Password</label><br>
         <input type="password" placeholder="Repeat password" name="password-repeat" required><br>
 

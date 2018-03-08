@@ -1,12 +1,15 @@
 'use strict';
 
+//see js/model.js for generating html function
+
+//login
+
 function onLogin(event) {
   event.preventDefault();
   const existingUser = {
     username: $('#usernameLogin').val(),
     password: $('#passwordLogin').val()
   }
-  console.log(existingUser);
   $.ajax({
     url: '/api/auth/login',
     dataType: 'json',
@@ -29,29 +32,6 @@ function onLogin(event) {
 // }
 
 
-// login
-
-function showLogin() {
-  const content = `
-  <section>
-    <form onsubmit="onLogin(event)" method="post" class="login">
-      <h1 class="center-align">Login</h1>
-      <div class="userWarn"></div>
-      <label for="username">Username</label><br>
-      <input type="text" name="username" id="usernameLogin" required><br>
-      <label for="password">Password</label><br>
-      <input type="password" name="password" id="passwordLogin" required><br>
-      <div class="center-align">
-      <button class="login btn center-align">login</button>
-      </div>
-      <p>demo user: ness</p>
-      <p>demo password: earthbound</p>      
-      <p class="no-accnt">Click <a href="#" class="create-accnt">here</a> to create an account.</p>
-    </form>
-  </section
-  `
-  $('main').html(content);
-};
 
 function login() {
   $('.start-button').on('click', function (e) {
@@ -66,6 +46,8 @@ function loginLink() {
     showLogin();
   });
 };
+
+//signup
 
 function onSignUp(event) {
   event.preventDefault();
@@ -84,44 +66,12 @@ function onSignUp(event) {
     contentType: 'application/json',
     success: function(data) {
       console.log(data)
-      localStorage.setItem("token", data.authToken);
-      window.location = "/dashboard.html";
+      localStorage.setItem('token', data.authToken);
+      window.location = '/dashboard.html';
     }
   })
 }
 
-// function duplicateUser() {
-//   $('.userWarn').html('Username is already taken');
-// }
-
-//signup
-function showSignup() {
-  const content = `
-  <section>
-    <form onsubmit="onSignUp(event)" method="post" class="sign-up">
-    <div class="userWarn"><div>
-      <h1 class="center-align">Sign Up</h1>
-        <p class="center-align">Please fill in this form to create an account</p>
-        <label for="name">First Name</label><br>
-        <input id="firstName" type="text" placeholder="Enter first name" name="first-name" required><br>
-        <label for="name">Last Name</label><br>
-        <input id="lastName" type="text" placeholder="Enter last name" name="last-name" required><br>
-        <label for="username">username</label><br>
-        <input id="username-su" type="text" placeholder="Enter username" name="username" required><br>
-        <label for="password">Password</label><br>
-        <input id="password-su" type="password" placeholder="Enter password" name="password" required><br>
-        <label for="password-repeat">Repeat Password</label><br>
-        <input type="password" placeholder="Repeat password" name="password-repeat" required><br>
-
-        <button type="button" class="cancel-btn btn">Cancel</button>
-        <button type="submit" class="singup-btn btn">Sign Up</button>
-        <p class="has-accnt">Already have an account? <a href="#" class="login-accnt">Log in</a></p>
-  
-    </form>
-  </section>
-  `
-  $('main').html(content);
-};
 
 function signupLink() {
   $('main').on('click', ".create-accnt", function (e) {
@@ -130,10 +80,56 @@ function signupLink() {
   });
 };
 
+//logout
+
+function onLogout() {
+  
+  $('#logout').on("submit", event => {
+    event.preventDefault();    
+    localStorage.setItem('token', '');
+    window.location = '/';
+  });
+}
+
+//user errors
+
+function hasWhiteSpace(string) {
+  return string.indexOf(" ") >= 0;
+}
+
+function userPassError() {
+  $("#signup-form").on('submit', function(event) {
+    event.preventDefault();
+    let username = $('#username-su').val();
+    let password = $('#password-su').val();
+    let repeatPassword = $('#repeat-password-su').val();
+    
+
+    if(password.length < 7) {
+      $('.userWarn').append('Password must be atleast 7 characters');
+    } else if(hasWhiteSpace(password) === true)  {
+      $('.userWarn').append('Cannot contain spaces');  
+    } else if(hasWhiteSpace(username) === true) {
+      $('.userWarn').append('Cannot contain spaces');
+    } else if(password != repeatPassword) {
+      $('.userWarn').append('Password must match');
+      
+    }
+    })
+  }
+
+
+function userDuplicate() {
+  $(".userWarn").append(" Username already taken");
+}
+
+
 function ignition() {
   login();
   loginLink();
   signupLink();
+  userPassError();
+  onLogout();
 }
 
 $(ignition);

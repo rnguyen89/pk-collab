@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 
 //creating task schema
 const TaskSchema = mongoose.Schema({
-  title: {type: String, required: true},
+  title: {type: String, required: false},
   description: {type: String},
   board: {type: String, default: "todo"},
   created: {type: Date, default: Date.now}

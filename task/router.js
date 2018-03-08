@@ -34,7 +34,7 @@ router.get('/', jwtAuth, (req, res) => {
   
   router.post('/', (req, res) => {
   
-    const requiredFields = ['title', 'description', 'created'];
+    const requiredFields = ['title'];
     for (let i = 0; i < requiredFields.length; i++) {
       const field = requiredFields[i];
       if (!(field in req.body)) {
@@ -49,7 +49,6 @@ router.get('/', jwtAuth, (req, res) => {
         title: req.body.title,
         description: req.body.description,
         created: req.body.created
-        // publishDate: req.body.publishDate
       })
       .then(task => res.status(201).json(task.serialize()))
       .catch(err => {

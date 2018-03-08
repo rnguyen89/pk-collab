@@ -41,7 +41,9 @@
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">PKollab</a>
           <ul id="nav-mobile" class="right">
-            <li><a href="#" id="logout">Logout</a></li>
+            <form id="logout">
+            <button type="submit">Logout</button>
+            </form>
           </ul>
         </div>
       </nav>
@@ -53,32 +55,31 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
 
-  <button class="add-new btn">Add Card</button>
+  <button id="add-new" class="btn">Add Card</button>
 
   <!-- testing boards -->
-  <div class="container">
-  <div class="row">
-  <div id="board">
-      <div id="todo" class="col s4">
+  <!-- <div class="container"> -->
+    <div class="row">
+      <div id="board">
+      <div id="todo">
         <div class="title">To Do</div>
+        <!-- <div class="refreshCard"></div> -->
 
       </div>
-  <div id="inprogress" class="col s4">
+       <div id="inprogress">
     <div class="title">In Progress</div>
-  </div>
+    <!-- <div class="refreshCard"></div> -->
+      </div>
     
-  <div id="done" class="col s4">
+      <div id="done">
     <div class="title">Done</div>
-  </div>
+    <!-- <div class="refreshCard"></div> -->
+      </div>
 
-</div> <!-- end of board -->
-</div> <!-- end of row -->
-</div> <!-- end of container -->
-  <!-- <div class="row"> -->
-    <div class="newCard">
-
-    </div>
-  <!-- </div> -->
+      </div> <!-- end of board -->
+    </div> <!-- end of row -->
+  <!-- </div> end of container -->
+  
 
 </main>
   <!-- footer
@@ -92,6 +93,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/model.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="js/dashboard.js"></script>
 </body>

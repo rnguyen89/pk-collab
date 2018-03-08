@@ -1,20 +1,47 @@
 'use strict';
-const state = {
+const STATE = {
   taskId: 0,
   tasks: []
 }
 
 function getTask() {
-  const url = 'http://localhost:8080/task'
-
   const options = {
-    url: url,
+    url: '/api/task/',
     dataType: 'json',
     type: 'GET',
-    success: function(tasks) {
-      state.tasks = tasks
-      state.tasks.forEach(task => {
-      $('#todo').append(generateNewCard(task));
+    headers: {
+      Authorization: 'Bearer ' + localStorage.token
+    },
+    success: function (tasks) {
+      STATE.tasks = tasks
+      $('#todo').html('');
+      $('#inprogress').html('');
+      $('#done').html('');
+      console.log(tasks);
+      const todo = STATE.tasks.filter(task => {
+        if(task.board === 'todo') {
+          return true;
+        }
+      })
+      const inprogress = STATE.tasks.filter(task => {
+        if(task.board === 'inprogress') {
+          return true;
+        }
+      })
+      const done = STATE.tasks.filter(task => {
+        if(task.board === 'done') {
+          return true;
+        }
+      })
+                
+      todo.forEach(task => {
+        $('#todo').append(generateNewCard(task));
+      })
+      inprogress.forEach(task => {
+        $('#inprogress').append(generateNewCard(task));
+      })
+      done.forEach(task => {
+        $('#done').append(generateNewCard(task));
       })
     }
   };
@@ -22,34 +49,19 @@ function getTask() {
   $.ajax(options);
 }
 
-function editTask(taskId) {
+// function saveTask(taskId) {
 
-  const task = state.tasks.find(task => {
-   return task.id === taskId
-  })
-  $.ajax({
-    type: 'POST', 
-    dataType: 'json', 
-    url: "http://localhost:8080/task", 
-    headers: {"content-type": "application/json"}, 
-    data: JSON.stringify(task)
-});
-}
-
-// function getPost() {
-//   const url = 'http://localhost:8080/'
-
-//   const options = {
-//     url: url,
+//   const task = STATE.tasks.find(task => {
+//     return task.id === taskId
+//   })
+//   $.ajax({
+//     type: 'PUT',
 //     dataType: 'json',
-//     type: 'POST',
-//     success: callbackTrailer
-//   };
-
-//   $.ajax(options);
+//     url: `/api/task/${data.id}`,
+//     headers: { "content-type": "application/json" },
+//     data: JSON.stringify(task)
+//   });
 // }
-
-
 
 function initIt() {
 
@@ -57,68 +69,131 @@ function initIt() {
     event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
   });
 
+  $('#board').on('submit', 'form', function (event) {
+    event.preventDefault();
+    console.log(event);
+    const form = $(event.target)
+    const data = {
+      title: form.find('.card-title').val(),
+      id: form.find('.cardId').val(),
+      board: form.find('.cardBoard').val(),
+      title: form.find('.card-title').val(),
+      description: form.find('.cardDescription').val(),
+    }
+    let url = '/api/task/'
+    let method = 'POST'
+    if(data.id) {
+      url += data.id 
+      method = 'PUT'
+    } 
+    $.ajax({
+      url: url,
+      method: method,
+      dataType: 'json',
+      data: JSON.stringify(data),
+      headers: {
+        Authorization: 'bearer ' + localStorage.token,
+        'content-type': 'application/json'
+      },
+      success: function () {
+        STATE.taskId++
+      }
+    })
+  });
+
   $('#todo, #inprogress, #done').bind('dragover', function (event) {
     event.preventDefault();
   });
 
   $('#todo, #inprogress, #done').bind('drop', function (event) {
+    console.log(event);
+    const newBoardId = event.currentTarget.id;
     var notecard = event.originalEvent.dataTransfer.getData("text/plain");
     event.currentTarget.appendChild(document.getElementById(notecard));
     event.preventDefault();
+    console.log(notecard);
+    const button = $(event.target)
+    const form = button.parent().parent()
+    const data = {
+      id: form.find('.cardId').val(),
+      board: newBoardId,
+    }
+    $.ajax({
+      url: `/api/task/${data.id}`,
+      method: 'PUT',
+      data: JSON.stringify(data),
+      headers: {
+        Authorization: 'bearer ' + localStorage.token,
+        'content-type': 'application/json'
+      },
+      success: function(data) {
+        getTask(data);
+      }
+    })
   });
 }
-
-
-function generateNewCard(task) {
-  return `
-    <div class="col s12 task" id="item${state.taskId}" draggable="true">
-    <div class="card small blue-grey darken-1 myCard">
-      <div class="card-content white-text">
-        <input class="card-title" placeholder="Task" />
-      </div>
-
-      <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="textarea${state.taskId}" class="materialize-textarea">
-            ${task.description}</textarea>
-            <label for="textarea${state.taskId}">Description</label>
-          </div>
-        </div>
-      </form>
-    </div>
-
-      <div class="card-action">
-        <a href="#" onclick="editTask(${task.taskId})" class="editCard">edit</a>
-        <a href="#" class="deleteCard">delete</a>
-      </div>
-    </div>
-  </div>
-</div>
-  `;
-}
-
 
 function removeCard() {
-  $('#board').on("click", ".deleteCard", function () {
-    $(this).closest('.task').remove();
+  
+  $('#board').on("click", "#deleteCard", function (event) {
+    console.log(event);
+    event.preventDefault();
+    event.stopPropagation();
+    const button = $(event.target)
+    const form = button.parent().parent()
+    const data = {
+      title: form.find('.card-title').val(),
+      id: form.find('.cardId').val(),
+    }
+
+  $.ajax({
+    url: `/api/task/${data.id}`,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'bearer ' + localStorage.token,
+      'content-type': 'application/json'
+    },
+      success: function(data) {
+        getTask();
+      }
+  })
   });
 }
+
 
 
 function renderNewCard() {
-  state.taskId++
-  $('#todo').append(generateNewCard({
-    taskId: state.taskId
-  }));
   $('.materialize-textarea').trigger('autoresize');
+
+  const taskObj = {
+    title: '',
+    description: '',
+    created: ''
+  }
+
+  
+  $.ajax({
+    url: '/api/task/',
+    method: 'POST',
+    dataType: 'json',
+    data: JSON.stringify(taskObj),
+    headers: {
+      Authorization: 'bearer ' + localStorage.token,
+      'content-type': 'application/json'
+    },
+    success: function () {
+      STATE.taskId++
+      $('#todo').append(generateNewCard({
+        taskId: STATE.taskId
+      }));
+    }
+  })
 }
 
 
 function handleNewCard() {
-  $('.add-new').on('click', function (e) {
-    e.preventDefault();
+  $('#add-new').on('click', function(event) {
+    event.preventDefault();
     renderNewCard();
   })
 }

@@ -98,7 +98,7 @@ function hasWhiteSpace(string) {
 }
 
 function userPassError() {
-  $("#signup-form").on('submit', function(event) {
+  $("body").on('submit', "#signup-form", function(event) {
     event.preventDefault();
     let username = $('#username-su').val();
     let password = $('#password-su').val();

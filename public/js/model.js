@@ -1,27 +1,32 @@
 'use strict';
 
+//this js file has our model for rendering html to the DOM dynamically
+
+// ondrop="drop(event)" ondragover="allowDrop(event)"
+
 function generateNewCard(task) {
     return `
-    <form>
+<form>
     
-      <div class="col s12 task" id="item${STATE.taskId}" ondrop="drop(event)" ondragover="allowDrop(event)" draggable="true">
-      <div class="card small blue-grey darken-1 myCard">
-        <div class="card-content white-text">
-          <input class="card-title" placeholder="Task" />
-          <input type="hidden" value="${task.id}" class="cardId">
-          <input type="hidden" value="${task.board}" class="cardBoard">
+  <div class="col s12 task" draggable="true" id="item${STATE.taskId}">
+    <div class="card small blue-grey darken-1 myCard">
+      <div class="card-content white-text">
+        <input class="card-title" value="${task.title ? task.title : ''}" placeholder="Task" required/>
+        <input type="hidden" value="${task.id ? task.id : ''}" class="cardId">
+        <input type="hidden" value="${task.board ? task.board : ''}" class="cardBoard">
+
     
-            <div class="input-field">
-              <textarea id="textarea${STATE.taskId}" class="materialize-textarea">
+          <div class="input-field">
+              <textarea  class="materialize-textarea cardDescription">${task.description ? task.description : ''}
               </textarea>
               <label class="active" for="textarea">Description</label>
-            </div>
+          </div>
   
         
-        </div>
+          </div>
         <div class="card-action">
           <button type="submit" id="save">Save</button>
-          <button type="submit" id="deleteCard">Delete</button>
+          <button type="button" id="deleteCard">Delete</button>
         </div>
       </div>
     </div>
@@ -36,10 +41,10 @@ function generateNewCard(task) {
   function showSignup() {
     const content = `
     <section>
-      <form onsubmit="onSignUp(event)" method="post" class="sign-up">
-      <div class="userWarn"><div>
+      <form id="signup-form" onsubmit="onSignUp(event)" method="post" class="sign-up">
         <h1 class="center-align">Sign Up</h1>
           <p class="center-align">Please fill in this form to create an account</p>
+          <div class="userWarn"></div>
           <label for="name">First Name</label><br>
           <input id="firstName" type="text" placeholder="Enter first name" name="first-name" required><br>
           <label for="name">Last Name</label><br>
@@ -49,7 +54,7 @@ function generateNewCard(task) {
           <label for="password">Password</label><br>
           <input id="password-su" type="password" placeholder="Enter password" name="password" required><br>
           <label for="password-repeat">Repeat Password</label><br>
-          <input type="password" placeholder="Repeat password" name="password-repeat" required><br>
+          <input id="repeat-password-su"type="password" placeholder="Repeat password" name="password-repeat" required><br>
   
           <button type="button" class="cancel-btn btn">Cancel</button>
           <button type="submit" class="singup-btn btn">Sign Up</button>
@@ -84,3 +89,4 @@ function generateNewCard(task) {
     `
     $('main').html(content);
   };
+

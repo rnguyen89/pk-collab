@@ -1,81 +1,142 @@
-'use strict';  
+'use strict';
+
+//see js/model.js for generating html function
+
+//login
+
+function onLogin(event) {
+  event.preventDefault();
+  const existingUser = {
+    username: $('#usernameLogin').val(),
+    password: $('#passwordLogin').val()
+  }
+  $.ajax({
+    url: '/api/auth/login',
+    dataType: 'json',
+    headers: {
+      Authorization: "basic " + btoa( `${existingUser.username}:${existingUser.password}`)
+    },
+    method: 'POST',
+    data: JSON.stringify(existingUser),
+    contentType: 'application/json',
+    success: function(data) {
+      console.log(data)
+      localStorage.setItem("token", data.authToken);
+      window.location = "/dashboard.html";
+    }
+  })
+}
+
+// function userErr() {
+//   $('.userWarn').html('Username does not exist');
+// }
 
 
-
-// login
-
-function showLogin() {
-  const content = `
-  <section>
-    <form action="" class="login">
-      <h1>Login</h1>
-      <label for="email">Email</label><br>
-      <input type="email" name="email" required><br>
-      <label for="password">Password</label><br>
-      <input type="password" name="password" required><br>
-      <button class="login btn">login</button>
-      <p>demo user: ness</p>
-      <p>demo password: earthbound</p>      
-      <p class="no-accnt">Click <a href="#" class="create-accnt">here</a> to create an account.</p>
-    </form>
-  </section
-  `
-  $('main').html(content);
-};
 
 function login() {
-  $('.start-button').on('click', function(e) {
+  $('.start-button').on('click', function (e) {
     e.preventDefault();
     showLogin();
   });
 };
 
 function loginLink() {
-  $('main').on('click', ".login-accnt", function(e) {
+  $('main').on('click', ".login-accnt", function (e) {
     e.preventDefault();
     showLogin();
   });
 };
 
 //signup
-function showSignup() {
-  const content = `
-  <section>
-    <form action="" class="sign-up">
-      <h1>Sign Up</h1>
-        <p>Please fill in this form to create an account</p>
-        <label for="name">First Name</label><br>
-        <input type="text" placeholder="Enter first name" name="first-name" required><br>
-        <label for="name">Last Name</label><br>
-        <input type="text" placeholder="Enter last name" name="last-name" required><br>
-        <label for="email">Email</label><br>
-        <input type="email" placeholder="Enter email" name="email" required><br>
-        <label for="password">Password</label><br>
-        <input type="password" placeholder="Enter password" name="password" required><br>
-        <label for="password-repeat">Repeat Password</label><br>
-        <input type="password" placeholder="Repeat password" name="password-repeat" required><br>
 
-        <button type="button" class="cancel-btn btn">Cancel</button>
-        <button type="submit" class="singup-btn btn">Sign Up</button>
-        <p class="has-accnt">Already have an account? <a href="#" class="login-accnt">Log in</a></p>
-  
-    </form>
-  </section>
-  `
-  $('main').html(content);
-};
+function onSignUp(event) {
+  event.preventDefault();
+  const newUser = {
+    firstName: $('#firstName').val(),
+    lastName: $('#lastName').val(),
+    username: $('#username-su').val(),
+    password: $('#password-su').val()
+  }
+  console.log(newUser);
+  $.ajax({
+    url: '/api/user/',
+    dataType: 'json',
+    method: 'POST',
+    data: JSON.stringify(newUser),
+    contentType: 'application/json',
+    success: function(data) {
+      console.log(data)
+      localStorage.setItem('token', data.authToken);
+      window.location = '/dashboard.html';
+    },
+      error: userPassError
+  })
+}
+
 
 function signupLink() {
-  $('main').on('click', ".create-accnt", function(e) {
+  $('main').on('click', ".create-accnt", function (e) {
     e.preventDefault();
     showSignup();
   });
 };
 
-  function ignition() {
-    login();
-    loginLink();
-    signupLink();
+//logout
+
+function onLogout() {
+  
+  $('.logout-btn').on("submit", event => {
+    event.preventDefault();    
+    localStorage.setItem('token', '');
+    window.location = '/';
+  });
+}
+
+//user errors
+
+function hasWhiteSpace(string) {
+  return string.indexOf(" ") >= 0;
+}
+
+function userPassError() {
+  $("body").on('submit', "#signup-form", function(event) {
+    event.preventDefault();
+    let username = $('#username-su').val();
+    let password = $('#password-su').val();
+    let repeatPassword = $('#repeat-password-su').val();
+    
+
+    if(password.length <= 7) {
+      // $('.userWarn').append('Password must be atleast 7 characters');
+      Materialize.toast('Password must be atleast 7 characters', 4000);
+    } if(hasWhiteSpace(password) === true)  {
+      // $('.userWarn').append('Cannot contain spaces');
+      Materialize.toast('Cannot contain spaces', 4000);
+        
+    } if(hasWhiteSpace(username) === true) {
+      // $('.userWarn').append('Cannot contain spaces');
+      Materialize.toast('Cannot contain spaces', 4000);
+      
+    } if(password != repeatPassword) {
+      // $('.userWarn').append('Password must match');
+      Materialize.toast('Password must match', 4000);
+      
+    }
+    })
   }
 
-  $(ignition);
+
+function userDuplicate() {
+  $(".userWarn").append(" Username already taken");
+}
+
+
+function ignition() {
+  login();
+  loginLink();
+  signupLink();
+  // userPassError();
+  onLogout();
+}
+
+$(ignition);

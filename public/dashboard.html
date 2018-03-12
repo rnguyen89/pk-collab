@@ -33,52 +33,101 @@
 
 
 <body>
-
-  <!-- hero content goes here
+  <main>
+    <!-- hero content goes here
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-
-
-
-
-  <!-- main content goes here
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-
-  <button class="add-new btn">Add Card</button>
-
-
-  <div class="row">
-    <div class="newCard">
-      <div class="col s4">
-        <div class="card blue-grey darken-1">
-          <div class="card-content white-text">
-            <span class="card-title">Card Title</span>
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require
-              little markup to use effectively.</p>
-          </div>
-          <div class="card-action">
-            <a href="#">This is a link</a>
-            <a href="#">This is a link</a>
-          </div>
+    <main>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">PKollab</a>
+          <ul id="nav-mobile" class="right">
+            <form id="logout">
+              <!-- <button type="submit" class="logout-btn #ee6e73">Logout</button> -->
+              <a href="/" type="submit" class="logout-btn">Logout</a>
+            </form>
+          </ul>
         </div>
-      </div>
-    </div>
-  </div>
-  </div>
+      </nav>
 
-  <!-- footer
+
+
+
+      <!-- main content goes here
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
-  <footer>
 
-  </footer>
+      <!-- <button id="add-new" class="btn">Add Card</button> -->
 
-  <!-- End Document
+      <!-- testing boards -->
+      <!-- <div class="container"> -->
+      <section class="container">
+
+        <div class="row">
+
+          <!-- <div class="board-points"></div> -->
+          <div class="board-points align-center">
+            <p class="progress-bar center-align">Progress Bar</p>
+            <div class="progress">
+              <div class="determinate" style="width: 100%"></div>
+            </div>
+            <div class="total-points center-align"></div>
+            <button id="add-new" class="btn">Add Task</button>
+
+          </div>
+
+          <div class="board-title">
+
+            <div class="todo-title">
+              <p>todo</p>
+              <!-- <button id="add-new" class="btn">Add Task</button> -->
+            </div>
+            <div class="inProgress-title">
+              <p>in-progress</p>
+            </div>
+            <div class="done-title">
+              <p>done</p>
+            </div>
+
+          </div>
+          <div id="board">
+            <div id="todo" ondrop="drop(event)">
+              <!-- <div class="title">To Do</div> -->
+              <!-- <div class="refreshCard"></div> -->
+
+            </div>
+            <div id="inProgress" ondrop="drop(event)">
+              <!-- <div class="title">In Progress</div> -->
+              <!-- <div class="refreshCard"></div> -->
+
+            </div>
+
+            <div id="done" ondrop="drop(event)">
+              <!-- <div class="title">Done</div> -->
+              <!-- <div class="refreshCard"></div> -->
+            </div>
+
+          </div>
+          <!-- end of board -->
+        </div>
+        <!-- end of row -->
+        <!-- </div> end of container -->
+      </section>
+
+    </main>
+    <!-- footer
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
-  <script type="text/javascript" src="js/app.js"></script>
-  <script type="text/javascript" src="js/dashboard.js"></script>
+
+    <footer>
+
+    </footer>
+
+    <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/model.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
 </body>
 
 </html>

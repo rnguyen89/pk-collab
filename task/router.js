@@ -92,13 +92,13 @@ router.get('/', jwtAuth, (req, res) => {
       .catch(err => res.status(500).json({ message: 'Something went wrong' }));
   });
   
-  router.delete('./:id', (req, res) => {
-    Task
-    .findByIdAndRemove(req.params.id)
-    .then(() => {
-      console.log(`Deleted task with \`${req.params.id}\``);
-    });
-  });
+  // router.delete('./:id', (req, res) => {
+  //   Task
+  //   .findByIdAndRemove(req.params.id)
+  //   .then(() => {
+  //     console.log(`Deleted task with \`${req.params.id}\``);
+  //   });
+  // });
   
   router.use('*', function(req, res) {
     res.status(404).json({message: 'Not found'});

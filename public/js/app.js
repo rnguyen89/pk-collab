@@ -68,7 +68,8 @@ function onSignUp(event) {
       console.log(data)
       localStorage.setItem('token', data.authToken);
       window.location = '/dashboard.html';
-    }
+    },
+      error: userPassError
   })
 }
 
@@ -84,7 +85,7 @@ function signupLink() {
 
 function onLogout() {
   
-  $('#logout').on("submit", event => {
+  $('.logout-btn').on("submit", event => {
     event.preventDefault();    
     localStorage.setItem('token', '');
     window.location = '/';
@@ -105,14 +106,20 @@ function userPassError() {
     let repeatPassword = $('#repeat-password-su').val();
     
 
-    if(password.length < 7) {
-      $('.userWarn').append('Password must be atleast 7 characters');
-    } else if(hasWhiteSpace(password) === true)  {
-      $('.userWarn').append('Cannot contain spaces');  
-    } else if(hasWhiteSpace(username) === true) {
-      $('.userWarn').append('Cannot contain spaces');
-    } else if(password != repeatPassword) {
-      $('.userWarn').append('Password must match');
+    if(password.length <= 7) {
+      // $('.userWarn').append('Password must be atleast 7 characters');
+      Materialize.toast('Password must be atleast 7 characters', 4000);
+    } if(hasWhiteSpace(password) === true)  {
+      // $('.userWarn').append('Cannot contain spaces');
+      Materialize.toast('Cannot contain spaces', 4000);
+        
+    } if(hasWhiteSpace(username) === true) {
+      // $('.userWarn').append('Cannot contain spaces');
+      Materialize.toast('Cannot contain spaces', 4000);
+      
+    } if(password != repeatPassword) {
+      // $('.userWarn').append('Password must match');
+      Materialize.toast('Password must match', 4000);
       
     }
     })
@@ -128,7 +135,7 @@ function ignition() {
   login();
   loginLink();
   signupLink();
-  userPassError();
+  // userPassError();
   onLogout();
 }
 

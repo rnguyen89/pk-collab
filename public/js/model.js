@@ -8,23 +8,27 @@ function generateNewCard(task) {
     return `
 <form>
     
-  <div class="col s12 task" draggable="true" id="item${STATE.taskId}">
-    <div class="card small blue-grey darken-1 myCard">
-      <div class="card-content white-text">
+  <div class="col s12 task" draggable="true" id="item${STATE.taskId}" ondragover="allowDrop(event)">
+    <div class="card small yellow lighten-3 myCard">
+      <div class="card-content black-text">
         <input class="card-title" value="${task.title ? task.title : ''}" placeholder="Task" required/>
         <input type="hidden" value="${task.id ? task.id : ''}" class="cardId">
         <input type="hidden" value="${task.board ? task.board : ''}" class="cardBoard">
 
     
           <div class="input-field">
-              <textarea  class="materialize-textarea cardDescription">${task.description ? task.description : ''}
+              <textarea class="materialize-textarea cardDescription">${task.description ? task.description : ''}
               </textarea>
               <label class="active" for="textarea">Description</label>
           </div>
   
         
           </div>
+
         <div class="card-action">
+
+        <input class="card-points" placeholder="Points" value="${task.points ? task.points : ''}" />
+
           <button type="submit" id="save">Save</button>
           <button type="button" id="deleteCard">Delete</button>
         </div>

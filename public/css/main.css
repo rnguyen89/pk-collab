@@ -15,6 +15,9 @@ body {
   padding-top: 4em;
 }
 
+.myCard {
+  min-width: 150px;
+}
 
 #main-header {
   background-image: url('/img/post_it.jpeg');
@@ -38,6 +41,10 @@ body {
 .login {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.clear-btn, .signup-btn, .login-btn {
+  background-color: mediumseagreen;
 }
 
 .logout-btn {
@@ -65,16 +72,16 @@ form {
   width: 100px;
   padding: 0;
   font-size: 12px;
-  margin: 0;
-  height: 20px;
+  margin-bottom: 10px;
   line-height: 1px;
   font-weight: 700;
 }
 
+.reward-btn, .reward-save-btn {
+  color: white;
+  background-color: mediumseagreen;
+}
 
-/* myCard {
-  width: 250px;
-} */
 
 .card.small {
 	min-height: 10px;
@@ -86,6 +93,7 @@ form {
   margin: 0;
   padding: 0;
   text-align: center;
+  color: lightslategrey;
 }
 
 .board-points {
@@ -118,10 +126,8 @@ body {
 }
 
 #board {
-  /* margin: 0 auto; */
-  /* padding-left: 100px;  */
   position: relative;
-  border: 5px solid green;
+  border: 5px solid lightcoral;
 	min-height: 600px;
   
 
@@ -131,46 +137,40 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
-  /* grid-template-columns: repeat(auto-fill, minmax(33% ,1fr)); */
-  /* min-height: 100%; */
-  
 }
 
 .title {
 	background-color:#a0ddc4;	
 	text-align:center;
 	color:white;
-	padding: 2px 0px;
+  padding: 2px 0px;
 }
 
 .board-title {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em; 
-  border: 3px solid purple;
   text-align: center;
 	background-color: lightcoral;
-  border:2px solid white;
+  border: 3px solid lightcoral;
   color: white;
   position: relative;
-
+  font-weight: 700;
 }
 		
 #todo, #inProgress, #done {
 	background-color: rgb(255, 255, 255);
 	position: relative;
-  min-width: 250px;
-
-	border: 7px solid black;	
+  border: 7px solid whitesmoke;
   margin: 0 auto;  
 }
     
-.cardTitle {
-	background-color: rgb(10, 138, 197);
-	border:2px solid white;
+.card-title {
+  border:2px solid white;
+  color: lightslategrey;
 }
 
 textarea.cardDescription {
-  color: black;
+  color: lightslategrey;
   margin-bottom: 3em;
 }

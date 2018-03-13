@@ -5,10 +5,10 @@
 // ondrop="drop(event)" ondragover="allowDrop(event)"
 
 function generateNewCard(task) {
-    return `
+  return `
 <form>
     
-  <div class="col s12 task" draggable="true" id="item${STATE.taskId}" ondragover="allowDrop(event)">
+  <div class="col s12 task" draggable="true" id="item${STATE.taskId}" ondragover="allowDrop(event)" ondrop="drop(event)">
     <div class="card small yellow lighten-3 myCard">
       <div class="card-content black-text">
         <input class="card-title" value="${task.title ? task.title : ''}" placeholder="Task" required/>
@@ -37,13 +37,33 @@ function generateNewCard(task) {
   </div>
   </form>
     `;
-    console.log(task);
-  }
+  console.log(task);
+}
 
-  //signup
+//modal
 
-  function showSignup() {
-    const content = `
+// function generateModal(reward) {
+//   return `
+//     <div class="card-content black-text">
+//     <input class="reward-title" placeholder="Reward" />
+
+
+//       <div class="input-field">
+//           <textarea class="materialize-textarea rewardDescription">
+//           </textarea>
+//           <label class="active" for="textarea">Reward Details</label>
+//       </div>
+
+    
+//       </div>
+//     `;
+//     console.log(reward);
+// }
+
+//signup
+
+function showSignup() {
+  const content = `
     <section>
       <form id="signup-form" onsubmit="onSignUp(event)" method="post" class="sign-up">
         <h1 class="center-align">Sign Up</h1>
@@ -60,20 +80,20 @@ function generateNewCard(task) {
           <label for="password-repeat">Repeat Password</label><br>
           <input id="repeat-password-su"type="password" placeholder="Repeat password" name="password-repeat" required><br>
   
-          <button type="button" class="cancel-btn btn">Cancel</button>
-          <button type="submit" class="singup-btn btn">Sign Up</button>
+          <button type="button" class="clear-btn btn">Clear</button>
+          <button type="submit" class="signup-btn btn">Sign Up</button>
           <p class="has-accnt">Already have an account? <a href="#" class="login-accnt">Log in</a></p>
     
       </form>
     </section>
     `
-    $('main').html(content);
-  };
+  $('main').html(content);
+};
 
-  //login
+//login
 
-  function showLogin() {
-    const content = `
+function showLogin() {
+  const content = `
     <section>
       <form onsubmit="onLogin(event)" method="post" class="login">
         <h1 class="center-align">Login</h1>
@@ -83,7 +103,7 @@ function generateNewCard(task) {
         <label for="password">Password</label><br>
         <input type="password" name="password" id="passwordLogin" required><br>
         <div class="center-align">
-        <button class="login btn center-align">login</button>
+        <button class="login-btn btn center-align">login</button>
         </div>
         <p>demo user: ness</p>
         <p>demo password: earthbound</p>      
@@ -91,6 +111,6 @@ function generateNewCard(task) {
       </form>
     </section
     `
-    $('main').html(content);
-  };
+  $('main').html(content);
+};
 

@@ -9,7 +9,7 @@ const TaskSchema = mongoose.Schema({
   title: {type: String, required: false},
   points: {type: Number},
   description: {type: String},
-  board: {type: String, default: "todo"},
+  board: {type: String, default: "todo"},  
   created: {type: Date, default: Date.now}
 });
 
@@ -21,7 +21,7 @@ TaskSchema.methods.serialize = function() {
       title: this.title,
       points: this.points,
       description: this.description,
-      board: this.board,
+      board: this.board,  
       created: this.created
     };
   }

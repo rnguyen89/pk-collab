@@ -11,6 +11,8 @@ const { DATABASE_URL, PORT } = require("./config");
 
 const { router: userRouter } = require("./user");
 const { router: taskRouter } = require("./task");
+const { router: rewardRouter } = require("./reward");
+
 
 const { router: authRouter, localStrategy, jwtStrategy } = require("./auth");
 
@@ -27,6 +29,8 @@ passport.use(jwtStrategy);
 app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/reward", rewardRouter);
+
 
 
 const jwtAuth = passport.authenticate("jwt", { session: false });

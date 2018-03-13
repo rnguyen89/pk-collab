@@ -71,37 +71,37 @@
               <div class="determinate" style="width: 100%"></div>
             </div>
             <div class="total-points center-align"></div>
-            <button id="add-new" class="btn">Add Task</button>
+            <button id="add-new" class="waves-effect waves-light btn">Add Task</button>
 
           </div>
 
           <div class="board-title">
 
             <div class="todo-title">
-              <p>todo</p>
+              <p>Todo</p>
               <!-- <button id="add-new" class="btn">Add Task</button> -->
             </div>
             <div class="inProgress-title">
-              <p>in-progress</p>
+              <p>In-progress</p>
             </div>
             <div class="done-title">
-              <p>done</p>
+              <p>Done</p>
             </div>
 
           </div>
           <div id="board">
-            <div id="todo" ondrop="drop(event)">
+            <div id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- <div class="title">To Do</div> -->
               <!-- <div class="refreshCard"></div> -->
 
             </div>
-            <div id="inProgress" ondrop="drop(event)">
+            <div id="inProgress" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- <div class="title">In Progress</div> -->
               <!-- <div class="refreshCard"></div> -->
 
             </div>
 
-            <div id="done" ondrop="drop(event)">
+            <div id="done" ondrop="drop(event)" ondragover="allowDrop(event)">
               <!-- <div class="title">Done</div> -->
               <!-- <div class="refreshCard"></div> -->
             </div>
@@ -112,6 +112,36 @@
         <!-- end of row -->
         <!-- </div> end of container -->
       </section>
+
+      <!-- Modal Trigger -->
+      <form id="rewardForm">
+        <div class="center-align">
+          <a class="waves-effect waves-light btn modal-trigger reward-btn" href="#modal1">Rewards</a>
+          <!-- <button type="submit" class="waves-effect waves-light btn modal-trigger">REWARDS</button> -->
+
+          <!-- Modal Structure -->
+
+          <div id="modal1" class="modal">
+            <div class="modal-content">
+              <div class="card-content black-text">
+                <input class="rewardTitle" placeholder="Reward" />
+
+
+                <div class="input-field">
+                  <textarea class="materialize-textarea rewardDescription">
+                      </textarea>
+                  <label class="active" for="textarea">Reward Details</label>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="modal-action modal-close waves-effect waves-light btn modal-trigger reward-save-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
 
     </main>
     <!-- footer

@@ -35,7 +35,7 @@
 //           return true;
 //         }
 //       })
-      
+
 //       STATE.total = 0
 //       STATE.points = 0
 
@@ -217,16 +217,20 @@ const STATE = {
 
 function allowDrop(event) {
   event.preventDefault();
+  console.log(event);
 }
 
 function drag(event) {
   event.dataTransfer.setData("text", event.target.id);
+  console.log(event);
 }
 
 function drop(event) {
   event.preventDefault();
+
   var data = event.dataTransfer.getData("text");
-  event.target.appendChild(document.getElementById(data));
+  event.target.appendChild(document.getElementById(`item${STATE.taskId}`));
+  console.log(data);
 }
 
 function getTask() {
@@ -258,7 +262,7 @@ function getTask() {
           return true;
         }
       })
-      
+
       STATE.total = 0
       STATE.points = 0
 
@@ -276,7 +280,7 @@ function getTask() {
         $('#done').append(generateNewCard(task));
       })
       $('.progress').html(`
-      <div class="determinate" style="width: ${STATE.total ? (STATE.points/STATE.total)*100 : 100}%"></div>
+      <div class="determinate" style="width: ${STATE.total ? (STATE.points / STATE.total) * 100 : 100}%"></div>
 
       `)
       $('.total-points').html(`
@@ -291,7 +295,7 @@ function getTask() {
 function initIt() {
 
   $('#board').on('dragstart', '.task', function (event) {
-    event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('id'));
+    event.originalEvent.dataTransfer.setData("text/plain", event.target.getAttribute('draggable'));
     drag();
   });
 
@@ -340,7 +344,7 @@ function initIt() {
     const newBoardId = event.currentTarget.id;
     var notecard = event.originalEvent.dataTransfer.getData("text/plain");
     // event.currentTarget.appendChild(document.getElementById(notecard));
-    
+
     console.log(notecard);
     const button = $(event.target)
     const form = button.parent().parent()
@@ -426,11 +430,78 @@ function handleNewCard() {
   })
 }
 
+function getReward() {
+  const options = {
+    url: '/api/reward/',
+    dataType: 'json',
+    type: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + localStorage.token
+    },
+    success: function (user) {
+      $('.reward-title').val(user.rewardTitle);
+      $('.rewardDescription').val(user.rewardDescription);
+      console.log(user);
+    }
+  }
+  $.ajax(options);  
+}
+
+function saveReward(event) {
+  console.log(event);
+  event.preventDefault();
+  const newRewardId = event.currentTarget.id;
+
+  const data = {
+    rewardTitle: $('.rewardTitle').val(),
+    rewardDescription: $('.rewardDescription').val()
+  }
+  $.ajax({
+    url: `/api/reward/${data.id}`,
+    method: 'PUT',
+    data: JSON.stringify(data),
+    headers: {
+      Authorization: 'bearer ' + localStorage.token,
+      'content-type': 'application/json'
+    },
+    success: function (data) {
+      getReward(data);
+    }
+  })
+};
+
+function submitReward() {
+  $('#rewardForm').on('submit', function(event) {
+    event.preventDefault();
+    saveReward();
+  })
+}
+
+function handleReward() {
+  $('.reward-btn').on('click', function(event) {
+    event.preventDefault();
+    $('.reward-title').val(''),
+    $('.rewardDescription').val('')
+    $('.modal-content').html(generateModal())
+    getReward();
+  })
+}
+
+
+function rewardModal() {
+  $('.modal').modal();
+  $('#modal1').modal('open');
+  $('#modal1').modal('close');
+}
+
 function init() {
   initIt();
   handleNewCard();
   removeCard();
   getTask();
+  rewardModal();
+  handleReward();
+  submitReward();
 }
 
 $(init);

@@ -125,4 +125,5 @@ router.get('/', jwtAuth, (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
 
+
 module.exports = {router};

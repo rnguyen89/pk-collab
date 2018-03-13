@@ -27,10 +27,14 @@ function onLogin(event) {
   })
 }
 
-// function userErr() {
-//   $('.userWarn').html('Username does not exist');
-// }
-
+function loginError() {
+  $("body").on('submit', "#login-form", function(event) {
+    event.preventDefault();
+    let username = $('#username-su').val();
+    let password = $('#password-su').val();
+    
+  });
+}
 
 
 function login() {

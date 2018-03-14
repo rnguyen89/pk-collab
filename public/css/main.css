@@ -2,6 +2,10 @@
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+strong {
+  font-weight:bold;
+ }
+
 body {
   background-color: ghostwhite;
 }
@@ -40,13 +44,6 @@ body {
   background-position: center;
   height: 100vh;
   width: 100vw;
-  /* display: grid; */
-  /* justify-content: center;
-  align-content: center;
-  text-align: center; */
-  /* padding: 0 20px;
-  color: white;
-  font-size: 700; */
   margin: 0;
   padding: 0;
   position: absolute;
@@ -54,21 +51,30 @@ body {
   opacity: .85;
 }
 
-.screenshot1, .screenshot2 {
-  width: 300px;
-  /* height: 300px; */
+.intro {
+  border: 15px solid lightskyblue;
+  padding: 2em;
+  margin-top: 5em;
+  margin-bottom:  5em;
 }
 
-/* .full-overlay {
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  z-index: 1;
-  opacity: .8;
-  background-color: rgba(0, 0, 0, 0.5);
-} */
+.bg-color {
+  background-color: lightslategray;
+}
+
+.title-h3 {
+  color: white;
+  font-weight: 700;
+  padding-top: 1em;
+}
+
+
+.screenshot1, .screenshot2 {
+  /* width: 300px; */
+  height: 300px;
+  margin: 2em auto 5em auto;
+  border: 15px solid lightgoldenrodyellow;
+}
 
 .sign-up {
   margin-left: 50px;

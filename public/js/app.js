@@ -141,6 +141,7 @@ function ignition() {
   loginLink();
   signupLink();
   onLogout();
+  $('.materialboxed').materialbox();
 }
 
 $(ignition);

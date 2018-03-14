@@ -242,7 +242,7 @@ function getReward() {
 
 
 
-function saveReward() {
+function renderReward() {
   console.log(event);
   $('#rewardForm').on('submit', function(event) {
     event.preventDefault();
@@ -264,7 +264,7 @@ function saveReward() {
       'content-type': 'application/json'
     },
     success: function (data) {
-      
+      submitReward();
     }
   })
 };
@@ -272,7 +272,7 @@ function saveReward() {
 function submitReward() {
   $('#rewardForm').on('submit', function(event) {
     event.preventDefault();
-    saveReward();
+    getReward();
   })
 }
 

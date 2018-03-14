@@ -26,3 +26,6 @@ The top has a progress bar and total points that users could see when logged in.
 
 ## Security
 - JSON Web Tokens (user authentication)
+
+# Screenshot
+![screenshot3](https://github.com/rnguyen89/pk-collab/blob/master/public/img/screenshot3.png?raw=true)

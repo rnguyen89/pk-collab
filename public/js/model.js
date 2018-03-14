@@ -6,9 +6,9 @@
 
 function generateNewCard(task) {
   return `
-<form>
+<form ondragstart="dragstart_handler(event);">
     
-  <div class="col s12 task" draggable="true" id="item${STATE.taskId}" ondragover="allowDrop(event)" ondrop="drop(event)">
+  <div class="col s12 task" draggable="true" ondragstart="drag(event)" id="item${STATE.taskId}">
     <div class="card small yellow lighten-3 myCard">
       <div class="card-content black-text">
         <input class="card-title" value="${task.title ? task.title : ''}" placeholder="Task" required/>
@@ -54,7 +54,7 @@ function generateNewCard(task) {
 //           <label class="active" for="textarea">Reward Details</label>
 //       </div>
 
-    
+
 //       </div>
 //     `;
 //     console.log(reward);
@@ -79,10 +79,11 @@ function showSignup() {
           <input id="password-su" type="password" placeholder="Enter password" name="password" required><br>
           <label for="password-repeat">Repeat Password</label><br>
           <input id="repeat-password-su"type="password" placeholder="Repeat password" name="password-repeat" required><br>
-  
-          <button type="button" class="clear-btn btn">Clear</button>
-          <button type="submit" class="signup-btn btn">Sign Up</button>
-          <p class="has-accnt">Already have an account? <a href="#" class="login-accnt">Log in</a></p>
+          <div class="center-align su-btn-wrapper">
+          <button type="reset" value="Reset" class="clear-btn btn">Clear</button>
+          <button type="submit" value="Submit"class="signup-btn btn">Sign Up</button>
+          <p class="has-accnt center-align">Already have an account? <a href="#" class="login-accnt">Log in</a></p>
+          </div>
     
       </form>
     </section>
@@ -102,7 +103,7 @@ function showLogin() {
         <input type="text" name="username" id="usernameLogin" required><br>
         <label for="password">Password</label><br>
         <input type="password" name="password" id="passwordLogin" required><br>
-        <div class="center-align">
+        <div class="center-align su-btn-wrapper">
         <button class="login-btn btn center-align">login</button>
         </div>
         <p>demo user: ness</p>

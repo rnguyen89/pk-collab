@@ -23,7 +23,8 @@ function onLogin(event) {
       console.log(data)
       localStorage.setItem("token", data.authToken);
       window.location = "/dashboard.html";
-    }
+    },
+    error: userDuplicate
   })
 }
 
@@ -125,13 +126,13 @@ function userPassError() {
       // $('.userWarn').append('Password must match');
       Materialize.toast('Password must match', 4000);
       
-    }
+    } 
     })
   }
 
 
 function userDuplicate() {
-  $(".userWarn").append(" Username already taken");
+  Materialize.toast('Please check username and password', 4000);
 }
 
 
@@ -139,7 +140,6 @@ function ignition() {
   login();
   loginLink();
   signupLink();
-  // userPassError();
   onLogout();
 }
 

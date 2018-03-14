@@ -15,14 +15,21 @@ const UserSchema = mongoose.Schema({
     required: true
   },
   firstName: {type: String, default: ''},
-  lastName: {type: String, default: ''}
+  lastName: {type: String, default: ''},
+  rewardTitle: {type: String, default: ''},
+  rewardDescription: {type: String, default: ''},
+  created: {type: Date, default: Date.now}
 });
 
 UserSchema.methods.serialize = function() {
   return {
     username: this.username || '',
     firstName: this.firstName || '',
-    lastName: this.lastName || ''
+    lastName: this.lastName || '',
+    rewardTitle: this.title,
+    rewardDescription: this.description,
+    created: this.created,
+    id: this._id
   };
 };
 

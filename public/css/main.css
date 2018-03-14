@@ -20,9 +20,9 @@ body {
 }
 
 #main-header {
-  background-image: url('/img/post_it.jpeg');
+  /* background-image: url('/img/post_it.jpeg'); */
   background-size: cover;
-  background-position: center;
+  background-position: center; 
   height: 100vh;
   display: grid;
   justify-content: center;
@@ -31,7 +31,44 @@ body {
   padding: 0 20px;
   color: white;
   font-size: 700;
+  z-index: 3;
 }
+
+.bg-img {
+  background-image: url('/img/post_it.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  /* display: grid; */
+  /* justify-content: center;
+  align-content: center;
+  text-align: center; */
+  /* padding: 0 20px;
+  color: white;
+  font-size: 700; */
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: -1;
+  opacity: .85;
+}
+
+.screenshot1, .screenshot2 {
+  min-width: 300px;
+  min-height: 300px;
+}
+
+/* .full-overlay {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 1;
+  opacity: .8;
+  background-color: rgba(0, 0, 0, 0.5);
+} */
 
 .sign-up {
   margin-left: 50px;
@@ -41,6 +78,10 @@ body {
 .login {
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.su-btn-wrapper, .su-btn-wrapper {
+  margin-top: 2em;
 }
 
 .clear-btn, .signup-btn, .login-btn {
@@ -165,12 +206,15 @@ body {
   margin: 0 auto;  
 }
     
-.card-title {
-  border:2px solid white;
+.card .card-title {
+  /* border:2px solid white; */
   color: lightslategrey;
+  font-size: 1.2em;
 }
 
 textarea.cardDescription {
   color: lightslategrey;
   margin-bottom: 3em;
+  font-size: .8em;
 }
+

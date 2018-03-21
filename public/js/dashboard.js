@@ -26,7 +26,6 @@ function drop(ev) {
 
 function dragstart_handler(ev) {
   console.log("dragStart");
-  // Add the target element's id to the data transfer object
   ev.dataTransfer.setData("text/plain", ev.target.id);
  }
 
@@ -43,7 +42,6 @@ function getTask() {
       $('#todo').html('');
       $('#inProgress').html('');
       $('#done').html('');
-      console.log(tasks);
       const todo = STATE.tasks.filter(task => {
         if (task.board === 'todo') {
           return true;
@@ -97,7 +95,6 @@ function initIt() {
 
   $('#board').on('submit', 'form', function (event) {
     event.preventDefault();
-    console.log(event);
     const form = $(event.target)
     const data = {
       title: form.find('.card-title').val(),
@@ -137,9 +134,7 @@ function initIt() {
     console.log(event);
     const newBoardId = event.currentTarget.id;
     var notecard = event.originalEvent.dataTransfer.getData("text/plain");
-    // event.currentTarget.appendChild(document.getElementById(notecard));
     event.preventDefault();
-    console.log(notecard);
     const button = $(event.target)
     const form = button.parent().parent()
     const data = {
@@ -236,7 +231,6 @@ function getReward() {
       Authorization: 'Bearer ' + localStorage.token
     },
     success: function (user) {
-      console.log(user)
       STATE.reward.rewardTitle = user.rewardTitle
       $('.rewardTitle').val(user.rewardTitle)
 
@@ -250,11 +244,8 @@ function getReward() {
 
 
 function renderReward() {
-  console.log(event);
   $('#rewardForm').on('submit', function(event) {
-    event.preventDefault();
-    console.log(event);
-  
+    event.preventDefault();  
   
   const newRewardId = event.currentTarget.id;
 
@@ -273,7 +264,6 @@ function renderReward() {
     },
     success: function (data) {
       submitReward();
-      console.log(data);
     }
   })
 })
@@ -283,7 +273,6 @@ function renderReward() {
 function submitReward() {
   $('#rewardForm').on(function(event) {
     event.preventDefault();
-    // getReward();
   })
 }
 
@@ -293,7 +282,6 @@ function handleReward() {
   $('.reward-btn').on('click', function(event) {
     $('.rewardTitle').val(STATE.rewardTitle);
     $('.rewardDescription').val(STATE.rewardDescription);
-    console.log('click reward button');
     getReward();
   })
 }

@@ -26,8 +26,8 @@ UserSchema.methods.serialize = function() {
     username: this.username || '',
     firstName: this.firstName || '',
     lastName: this.lastName || '',
-    rewardTitle: this.title,
-    rewardDescription: this.description,
+    rewardTitle: this.rewardTitle,
+    rewardDescription: this.rewardDescription,
     created: this.created,
     id: this._id
   };

@@ -24,7 +24,6 @@ body {
 }
 
 #main-header {
-  /* background-image: url('/img/post_it.jpeg'); */
   background-size: cover;
   background-position: center; 
   height: 100vh;
@@ -143,6 +142,10 @@ form {
   color: lightslategrey;
 }
 
+.card-action {
+  padding: 1px 24px !important;
+}
+
 .board-points {
   margin-top: 50px;
 }
@@ -176,8 +179,6 @@ body {
   position: relative;
   border: 5px solid lightcoral;
 	min-height: 600px;
-  
-
 }
 
 #board {
@@ -213,7 +214,6 @@ body {
 }
     
 .card .card-title {
-  /* border:2px solid white; */
   color: lightslategrey;
   font-size: 1.2em;
 }

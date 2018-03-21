@@ -2,13 +2,12 @@
 
 //this js file has our model for rendering html to the DOM dynamically
 
-// ondrop="drop(event)" ondragover="allowDrop(event)"
 
 function generateNewCard(task) {
   return `
 <form ondragstart="dragstart_handler(event);">
     
-  <div class="col s12 task" draggable="true" ondragstart="drag(event)" id="item${STATE.taskId}">
+  <div class="col s12 task" draggable="true" ondragstart="drag(event)" id="item${task.id}">
     <div class="card small yellow lighten-3 myCard">
       <div class="card-content black-text">
         <input class="card-title" value="${task.title ? task.title : ''}" placeholder="Task" required/>
@@ -39,28 +38,6 @@ function generateNewCard(task) {
     `;
   console.log(task);
 }
-
-//modal
-
-// function generateModal(reward) {
-//   return `
-//     <div class="card-content black-text">
-//     <input class="reward-title" placeholder="Reward" />
-
-
-//       <div class="input-field">
-//           <textarea class="materialize-textarea rewardDescription">
-//           </textarea>
-//           <label class="active" for="textarea">Reward Details</label>
-//       </div>
-
-
-//       </div>
-//     `;
-//     console.log(reward);
-// }
-
-//signup
 
 function showSignup() {
   const content = `

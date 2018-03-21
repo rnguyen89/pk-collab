@@ -79,7 +79,7 @@ router.get('/', jwtAuth, (req, res) => {
     }
   
     const toUpdate = {};
-    const updateableFields = ['title', 'description', 'created'];
+    const updateableFields = ['title', 'description', 'created', 'board'];
     updateableFields.forEach(field => {
       if (field in req.body) {
         toUpdate[field] = req.body[field];
@@ -91,14 +91,6 @@ router.get('/', jwtAuth, (req, res) => {
       .then(updatedPost => res.status(204).end())
       .catch(err => res.status(500).json({ message: 'Something went wrong' }));
   });
-  
-  // router.delete('./:id', (req, res) => {
-  //   Task
-  //   .findByIdAndRemove(req.params.id)
-  //   .then(() => {
-  //     console.log(`Deleted task with \`${req.params.id}\``);
-  //   });
-  // });
   
   router.use('*', function(req, res) {
     res.status(404).json({message: 'Not found'});

@@ -3,7 +3,11 @@ const STATE = {
   taskId: 0,
   total: 0,
   points: 0,
-  tasks: []
+  tasks: [],
+  reward: {
+    rewardTitle: '',
+    rewardDescription: '' 
+  }
 }
 
 function allowDrop(ev) {
@@ -139,8 +143,8 @@ function initIt() {
     const button = $(event.target)
     const form = button.parent().parent()
     const data = {
-      id: form.find('.cardId').val(),
-      board: newBoardId,
+      id: notecard.substr(4),
+      board: newBoardId
     }
     $.ajax({
       url: `/api/task/${data.id}`,
@@ -205,9 +209,10 @@ function renderNewCard() {
     success: function () {
       STATE.taskId++
       $('#todo').append(generateNewCard({
-        taskId: STATE.taskId
+        id: STATE.taskId
       }));
       getTask();
+      
     }
   })
 }
@@ -230,11 +235,13 @@ function getReward() {
     headers: {
       Authorization: 'Bearer ' + localStorage.token
     },
-    success: function (reward) {
+    success: function (user) {
+      console.log(user)
+      STATE.reward.rewardTitle = user.rewardTitle
+      $('.rewardTitle').val(user.rewardTitle)
 
-      $('.rewardTitle').val(reward.rewardTitle);
-      $('.rewardDescription').val(reward.rewardDescription);
-      console.log(reward);
+      STATE.reward.rewardDescription = user.rewardDescription
+      $('.rewardDescription').val(user.rewardDescription)
     }
   }
   $.ajax(options);  
@@ -246,7 +253,8 @@ function renderReward() {
   console.log(event);
   $('#rewardForm').on('submit', function(event) {
     event.preventDefault();
-  })
+    console.log(event);
+  
   
   const newRewardId = event.currentTarget.id;
 
@@ -265,20 +273,27 @@ function renderReward() {
     },
     success: function (data) {
       submitReward();
+      console.log(data);
     }
   })
+})
 };
 
+
 function submitReward() {
-  $('#rewardForm').on('submit', function(event) {
+  $('#rewardForm').on(function(event) {
     event.preventDefault();
-    getReward();
+    // getReward();
   })
 }
 
 function handleReward() {
+
+  
   $('.reward-btn').on('click', function(event) {
-    event.preventDefault();
+    $('.rewardTitle').val(STATE.rewardTitle);
+    $('.rewardDescription').val(STATE.rewardDescription);
+    console.log('click reward button');
     getReward();
   })
 }
@@ -299,6 +314,7 @@ function init() {
   rewardModal();
   handleReward();
   submitReward();
+  renderReward();
 }
 
 $(init);

@@ -112,18 +112,15 @@ function userPassError() {
     
 
     if(password.length <= 7) {
-      // $('.userWarn').append('Password must be atleast 7 characters');
+
       Materialize.toast('Password must be atleast 7 characters', 4000);
     } if(hasWhiteSpace(password) === true)  {
-      // $('.userWarn').append('Cannot contain spaces');
       Materialize.toast('Cannot contain spaces', 4000);
         
     } if(hasWhiteSpace(username) === true) {
-      // $('.userWarn').append('Cannot contain spaces');
       Materialize.toast('Cannot contain spaces', 4000);
       
     } if(password != repeatPassword) {
-      // $('.userWarn').append('Password must match');
       Materialize.toast('Password must match', 4000);
       
     } 

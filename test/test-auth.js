@@ -5,7 +5,7 @@ const chaiHttp = require('chai-http');
 const jwt = require('jsonwebtoken');
 
 const { app, runServer, closeServer } = require('../server');
-const { User } = require('../users');
+const { User } = require('../user');
 const { JWT_SECRET } = require('../config');
 
 const expect = chai.expect;

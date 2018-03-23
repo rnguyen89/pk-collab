@@ -121,14 +121,14 @@ router.post('/', jsonParser, (req, res) => {
 
 router.get('/', jwtAuth, (req, res) => {
   try {
-    return User.findOne({ _id: req.user.id })
+    return User.findOne({ _id: req.user._id })
       .then(user => res.json(user.serialize()))
       .catch(err => {
         res.status(500).json({
           message:
             'Internal server error', err
         });
-
+        console.log(req.user);
 
         console.log(err);
       })

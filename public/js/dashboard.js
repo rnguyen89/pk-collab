@@ -25,7 +25,6 @@ function drop(ev) {
 }
 
 function dragstart_handler(ev) {
-  console.log("dragStart");
   ev.dataTransfer.setData("text/plain", ev.target.id);
  }
 
@@ -131,7 +130,6 @@ function initIt() {
   });
 
   $('#todo, #inProgress, #done').bind('drop', function (event) {
-    console.log(event);
     const newBoardId = event.currentTarget.id;
     var notecard = event.originalEvent.dataTransfer.getData("text/plain");
     event.preventDefault();
@@ -159,7 +157,6 @@ function initIt() {
 function removeCard() {
 
   $('#board').on("click", "#deleteCard", function (event) {
-    console.log(event);
     event.preventDefault();
     event.stopPropagation();
     const button = $(event.target)

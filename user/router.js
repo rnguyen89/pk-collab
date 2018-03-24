@@ -121,7 +121,8 @@ router.post('/', jsonParser, (req, res) => {
 
 router.get('/', jwtAuth, (req, res) => {
   try {
-    return User.findOne({ _id: req.user._id })
+    console.log(req.user.id)
+    return User.findOne({ _id: req.user.id })
       .then(user => res.json(user.serialize()))
       .catch(err => {
         res.status(500).json({

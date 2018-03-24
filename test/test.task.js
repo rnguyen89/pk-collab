@@ -16,7 +16,7 @@ chai.use(chaiHttp);
 
 
 function seedTaskData() {
-  console.info('seeding blog data');
+  console.info('seeding task data');
   const seedData = [];
 
   for(let i=1; i<10; i++) {
@@ -37,17 +37,7 @@ function generateDescription() {
   return content[Math.floor(Math.random() * description.length)];
 }
 
-// function generateAuthorName() {
-//   const author = {
-//     firstName: ['tom', 'steve', 'hunter', 'willit'],
-//     lastName: ['chung', 'brady', 'nguyen', 'dang']
-//   }
-//   return author[Math.floor(Math.random() * author.length)];
-// }
 
-//generate obj representing blog data
-//use for seed data db
-//or req.body data
 function generateTask() {
   return {
     title: faker.title.generateTitle(),
@@ -110,7 +100,6 @@ describe('GET endpoint', function() {
       expect(resTask.id).to.equal(post.id);
       expect(resTask.title).to.equal(post.title);
       expect(resTask.description).to.equal.toString(post.description);
-    //   expect(resTask.author).to.equal.to(post.author);
 
     });
   });
@@ -131,15 +120,13 @@ describe('POST endpoint', function() {
       expect(res.body).to.include.keys(
         'id', 'title', 'description');
       expect(res.body.title).to.equal(newPost.title);
-      expect(res.body.content).to.equal(newPost.content);
-      expect(res.body.author).to.equal(newPost.author);
+      expect(res.body.description).to.equal(newPost.description);
+
       return Task.findById(res.body.id);
     })
     .then(function(post) {
       expect(post.title).to.equal(newPost.title);
       expect(post.description).to.equal(newPost.description);
-    //   expect(post.author.firstName).to.equal(newPost.author.firstName);
-    //   expect(post.author.lastName).to.equal(newPost.author.lastName);
     });
   });
 });
@@ -148,14 +135,14 @@ describe('PUT endoing', function() {
   it('should update files you send over', function() {
     const updateData = {
       title: 'title testing',
-      content: 'testing the content'
+      description: 'testing the description'
     };
     return Task
       .findOne()
       .then(function(post) {
         updateData.id = post.id
         return chai.request(app)
-          .put(`/posts/${post.id}`)
+          .put(`/:id`)
           .send(updateData)
       })
       .then(function(res) {
@@ -176,7 +163,7 @@ describe('DELETE endooint', function() {
       .findOne()
       .then(function(_post) {
         post = _post;
-        return chai.request(app).delete(`/posts/${post.id}`);
+        return chai.request(app).delete(`/:id`);
       })
       .then(function(res) {
         expect(res).to.have.status(204);

@@ -31,8 +31,8 @@ function onLogin(event) {
 function loginError() {
   $("body").on('submit', "#login-form", function(event) {
     event.preventDefault();
-    let username = $('#username-su').val();
-    let password = $('#password-su').val();
+    let username = $('#usernameLogin').val();
+    let password = $('#passwordLogin').val();
     
   });
 }
@@ -59,8 +59,8 @@ function onSignUp(event) {
   const newUser = {
     firstName: $('#firstName').val(),
     lastName: $('#lastName').val(),
-    username: $('#username-su').val(),
-    password: $('#password-su').val()
+    username: $('#usernameLogin').val(),
+    password: $('#passwordLogin').val()
   }
   console.log(newUser);
   $.ajax({
@@ -72,7 +72,7 @@ function onSignUp(event) {
     success: function(data) {
       console.log(data)
       localStorage.setItem('token', data.authToken);
-      window.location = '/dashboard.html';
+      onLogin();
     },
       error: userPassError
   })
@@ -106,9 +106,9 @@ function hasWhiteSpace(string) {
 function userPassError() {
   $("body").on('submit', "#signup-form", function(event) {
     event.preventDefault();
-    let username = $('#username-su').val();
-    let password = $('#password-su').val();
-    let repeatPassword = $('#repeat-password-su').val();
+    let username = $('#usernameLogin').val();
+    let password = $('#passwordLogin').val();
+    let repeatPassword = $('#repeat-passwordLogin').val();
     
 
     if(password.length <= 7) {

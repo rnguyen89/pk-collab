@@ -51,11 +51,11 @@ function showSignup() {
           <label for="name">Last Name</label><br>
           <input id="lastName" type="text" placeholder="Enter last name" name="last-name" required><br>
           <label for="username">username</label><br>
-          <input id="username-su" type="text" placeholder="Enter username" name="username" required><br>
+          <input id="usernameLogin" type="text" placeholder="Enter username" name="username" required><br>
           <label for="password">Password</label><br>
-          <input id="password-su" type="password" placeholder="Enter password" name="password" required><br>
+          <input id="passwordLogin" type="password" placeholder="Enter password" name="password" required><br>
           <label for="password-repeat">Repeat Password</label><br>
-          <input id="repeat-password-su"type="password" placeholder="Repeat password" name="password-repeat" required><br>
+          <input id="passwordLogin"type="password" placeholder="Repeat password" name="password-repeat" required><br>
           <div class="center-align su-btn-wrapper">
           <button type="reset" value="Reset" class="clear-btn btn">Clear</button>
           <button type="submit" value="Submit"class="signup-btn btn">Sign Up</button>

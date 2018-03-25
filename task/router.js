@@ -10,7 +10,6 @@ const jwtAuth = passport.authenticate("jwt", { session: false });
 
 
 router.get('/', jwtAuth, (req, res) => {
-  console.log('hello world');
     Task
       .find({user: req.user.id})
       .then(tasks => {

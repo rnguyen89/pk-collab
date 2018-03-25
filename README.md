@@ -1,7 +1,7 @@
 # pk-collab
 
 The name is suppose to reference 'Parents and Kids' and is a full stack web app that lets parents use a trello-like board
-with there children.
+with their children.
 
 # Introduction
 

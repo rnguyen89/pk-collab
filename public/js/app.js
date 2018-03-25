@@ -72,7 +72,7 @@ function onSignUp(event) {
     success: function(data) {
       console.log(data)
       localStorage.setItem('token', data.authToken);
-      onLogin();
+      onLogin(event);
     },
       error: userPassError
   })

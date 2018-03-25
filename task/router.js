@@ -12,7 +12,7 @@ const jwtAuth = passport.authenticate("jwt", { session: false });
 router.get('/', jwtAuth, (req, res) => {
   console.log('hello world');
     Task
-      .find()
+      .find({user: req.user.id})
       .then(tasks => {
         res.json(tasks.map(task => task.serialize()));
       })
@@ -32,7 +32,7 @@ router.get('/', jwtAuth, (req, res) => {
       });
   });
   
-  router.post('/', (req, res) => {
+  router.post('/', jwtAuth, (req, res) => {
   
     const requiredFields = ['title'];
     for (let i = 0; i < requiredFields.length; i++) {
@@ -48,7 +48,9 @@ router.get('/', jwtAuth, (req, res) => {
       .create({
         title: req.body.title,
         description: req.body.description,
-        created: req.body.created
+        created: req.body.created,
+        //adding create user
+        user: req.user.id
       })
       .then(task => res.status(201).json(task.serialize()))
       .catch(err => {

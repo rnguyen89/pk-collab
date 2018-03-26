@@ -1,7 +1,9 @@
 # pk-collab
 
 The name is suppose to reference 'Parents and Kids' and is a full stack web app that lets parents use a trello-like board
-with their children.
+with their children. 
+
+The app is deployed through Heroku: https://cryptic-river-66724.herokuapp.com/
 
 # Introduction
 

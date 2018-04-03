@@ -118,6 +118,10 @@ form {
   font-weight: 700;
 }
 
+#rewardForm {
+  margin: 70px 0;
+}
+
 .reward-btn, .reward-save-btn {
   color: white;
   background-color: mediumseagreen;
